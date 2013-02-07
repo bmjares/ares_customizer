@@ -1,0 +1,28 @@
+@(clientForm: Form[Client])
+
+@main("test") {
+    
+    <h1>Add a computer</h1>
+    
+    @form(routes.Application.save()) {
+        
+        <fieldset>
+            @inputText(clientForm("clientId"), '_label -> "Client ID")
+
+            @select(
+                clientForm("pageType"), 
+                companies,
+                '_label -> "Page Type", '_default -> "-- Choose a Page --",
+                '_showConstraints -> false
+            )
+            
+
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Create this computer" class="btn primary">
+        </div>
+        
+    }
+    
+}

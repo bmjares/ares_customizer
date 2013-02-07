@@ -1,0 +1,40 @@
+@(message: String)
+
+@main("test") {
+
+  <form class="form-horizontal">
+    <fieldset>
+      <div id="legend" class="">
+        <legend class="">Create Layout</legend>
+      </div>
+          <div class="control-group">
+      <label class="control-label" for="input01">Client ID</label>
+          <div class="controls">
+            <input type="text" placeholder="ex: 77 " class="input-xlarge">
+          </div>
+        </div>
+          <!-- Select Basic -->
+          <label class="control-label">Page Type</label>
+          <div class="controls">
+            <select class="input-xlarge">
+              <option>Hotel</option>
+              <option>Attraction</option>
+              <option>Package</option>
+              <option>Multi-Product</option>
+            </select>
+          </div>
+
+        </div>
+        
+        <div class="control-group">
+
+          <!-- Button -->
+          <div class="controls">
+            <button class="btn btn-success">Submit</button>
+          </div>
+        </div>
+
+    </fieldset>
+  </form>
+    
+}
