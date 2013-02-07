@@ -14,13 +14,22 @@ case class Client(
   pageType: String
 )
 
-object Client extends ModelCompanion[Client, ObjectId] {
-  val collection = mongoCollection("clients")
-  val dao = new SalatDAO[Client, ObjectId](collection = collection) {}
+//object Client extends ModelCompanion[Client, ObjectId] {
+//  val collection = mongoCollection("clients")
+//  val dao = new SalatDAO[Client, ObjectId](collection = collection) {}
+//
+//  def findOneByClientId(clientId: Int): Option[Client] = dao.findOne(MongoDBObject("clientId" -> clientId))
+//  
+//  def options: Seq[(String,String, String)] = {
+//    find(MongoDBObject.empty).map(it => (it.id.toString, it.clientId.toString, it.pageType)).toSeq
+//  }
+//}
 
-  def findOneByClientId(clientId: Int): Option[Client] = dao.findOne(MongoDBObject("clientId" -> clientId))
+object ClientsObj {
+  val clients = MongoConnection()("ares_customizer")("clients")
   
-  def options: Seq[(String,String, String)] = {
-    find(MongoDBObject.empty).map(it => (it.id.toString, it.clientId.toString, it.pageType)).toSeq
+  def all = clients.map(grater[Client].asObject(_)).toList
+  def create(client: Client) {
+    clients += grater[Client].asDBObject(client)
   }
 }
