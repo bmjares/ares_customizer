@@ -21,20 +21,5 @@ object Application extends Controller {
   def index = Action { implicit request =>
     Ok(views.html.index(ClientsObj.all.toString))
   }
-  
-//  def create = Action {
-//    Ok(views.html.createForm(ClientForm(), Client.options))
-//  }
-  
-  def save = TODO
-  def create = TODO
-  
-//  def clientForm(id: ObjectId = new ObjectId) = Form(
-//    mapping(
-//      "id" -> ignored(id),
-//      "clientId" -> number,
-//      "pageType" -> text
-//    )(Client.apply)(Client.unapply)
-//  )
 
 }

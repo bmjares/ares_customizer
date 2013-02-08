@@ -30,11 +30,22 @@ object Clients extends Controller {
     Ok(views.html.index("ares"))
   }
   
-  def save = TODO
+//  def save = Action { implicit request =>
+//    Logger.info("Calling action save")
+//    clientForm.bindFromRequest.fold(
+//      formWithErrors => BadRequest(views.html.createForm(clientForm)),
+//      client => {
+//        Client.insert(client)
+//        Home.flashing("success" -> "Client %s has been created".format(client.clientId))
+//      }
+//    )
+//  }
 
+  def save = TODO
+  
   def create = Action { implicit request =>
     clientForm.bindFromRequest.fold(
-      form => BadRequest(views.html.createForm(clientForm)),
+      form => BadRequest(views.html.createForm(form)),
       client => {
         ClientsObj.create(client)
         Redirect(routes.Application.index()).flashing("message" -> "Submitted")
