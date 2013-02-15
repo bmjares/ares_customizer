@@ -48,7 +48,7 @@ object Clients extends Controller {
       form => BadRequest(views.html.createForm(form)),
       client => {
         ClientsObj.create(client)
-        Redirect(routes.Application.index()).flashing("message" -> "Submitted")
+        Redirect(routes.Headers.create()).flashing("message" -> "Submitted")
       }
     )
   }
