@@ -8,7 +8,7 @@ GET     /                           controllers.Application.index
 GET     /clients	              	controllers.Clients.create
 POST    /clients                  	controllers.Clients.save
 
-GET		/layouts/				controllers.Headers.create()
+GET		/headers/:clientId			controllers.Headers.create(clientId: Int)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -47,8 +47,10 @@ object Clients extends Controller {
     clientForm.bindFromRequest.fold(
       form => BadRequest(views.html.createForm(form)),
       client => {
+        Logger.info("client in clients create: "+ client.toString)
+        Logger.info("access clientid: "+ client.clientId)
         ClientsObj.create(client)
-        Redirect(routes.Headers.create()).flashing("message" -> "Submitted")
+        Redirect(routes.Headers.create(client.clientId.toInt)).flashing("message" -> "Submitted")
       }
     )
   }

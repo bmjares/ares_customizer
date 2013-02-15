@@ -26,14 +26,17 @@ object Headers extends Controller {
     )(Header.apply)(Header.unapply)
   )
   
-  def create = Action { implicit request =>
+  def submit = TODO
+  
+  //request.queryString.map { case (k,v) => k -> v.mkString }
+  def create(clientId: Int) = Action { implicit request =>
     val body = request.body
-    Logger.info("body in headers create: "+ body.toString)
+    Logger.info("clientId in headers create: "+ clientId.toString)
     headerForm.bindFromRequest.fold(
-      form => BadRequest(views.html.createHeader(form)),
+      form => BadRequest(views.html.createHeader(clientId, form)),
       header => {
         HeaderObj.create(header)
-        Redirect(routes.Headers.create()).flashing("message" -> "Submitted")
+        Ok(views.html.index("ares")).flashing("message" -> "Submitted")
       }
     )
   }

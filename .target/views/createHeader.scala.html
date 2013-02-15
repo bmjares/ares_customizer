@@ -3,7 +3,7 @@
 @import helper._
 @main("test") {
 
-	@helper.form(action = routes.Headers.create) {
+	@helper.form(action = routes.Headers.create(clientId: Int)) {
 	  <form class="form-horizontal">
 	    <fieldset>
 	      <div id="legend" class="">
