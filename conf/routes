@@ -5,8 +5,8 @@
 # Home page
 GET     /                           controllers.Application.index
 
-GET     /clients	              	controllers.Clients.create
-POST    /clients                  	controllers.Clients.save
+GET     /clients/new	            controllers.Clients.create
+#POST    /clients/:clientId          controllers.Clients.edit(clientId: Int)
 
 GET		/headers/:clientId			controllers.Headers.create(clientId: Int)
 

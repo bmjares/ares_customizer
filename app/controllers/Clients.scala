@@ -41,7 +41,7 @@ object Clients extends Controller {
 //    )
 //  }
 
-  def save = TODO
+  def edit = TODO
   
   def create = Action { implicit request =>
     clientForm.bindFromRequest.fold(
