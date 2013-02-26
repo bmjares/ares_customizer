@@ -1,21 +1,46 @@
-@(message: String)
+@(clients: String, editClient: Form[Client])
 
-@main("test") {
+@main("aRes") {
 
-  <form class="form-horizontal">
     <fieldset>
       <div id="legend" class="">
         <legend class="">Welcome to the aRes Customizer</legend>
       </div>
-
-          <!-- Select Basic -->
           <div class="controls">
 			<a href="/clients/new">Create New Landing Page</a>
+          </div><br/><br/>
+          <div class="controls">
+			<p>@clients</p>
           </div>
-
         </div>
 
-    </fieldset>
-  </form>
+    </fieldset> 
+    
+	@helper.form(action = routes.Clients.edit) {
+	<br/><br/><br/>
+	  <form class="form-horizontal">
+	    <fieldset>
+	      <div id="legend" class="">
+	        <legend class="">Edit Existing Page</legend>
+	      </div>
+	    
+	    <div class="control-group">
+	          <!-- Text input-->
+	          <div class="controls">
+				@helper.inputText(editClient("clientId"), 'class -> "form-horizontal", '_label -> "Client ID", '_help -> "")
+	          </div>
+	        </div>
+	    <div class="control-group">
+	          <label class="control-label"></label>
+	
+	          <!-- Button -->
+	          <div class="controls">
+	            <button class="btn btn-warning">Edit</button>
+	          </div>
+	        </div>	
+	
+	    </fieldset>
+	  </form>
+	}
     
 }

@@ -18,8 +18,6 @@ import models._
 
 object Application extends Controller {
 
-  def index = Action { implicit request =>
-    Ok(views.html.index(ClientsObj.all.toString))
-  }
+  def index = TODO
 
 }

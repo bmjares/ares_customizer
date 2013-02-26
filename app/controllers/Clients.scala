@@ -27,21 +27,19 @@ object Clients extends Controller {
   )
 
   def index = Action { implicit request =>
-    Ok(views.html.index("ares"))
+    val clientsList = ClientsObj.all(1)
+    Ok(views.html.index(clientsList.toString, clientForm))
   }
-  
-//  def save = Action { implicit request =>
-//    Logger.info("Calling action save")
-//    clientForm.bindFromRequest.fold(
-//      formWithErrors => BadRequest(views.html.createForm(clientForm)),
-//      client => {
-//        Client.insert(client)
-//        Home.flashing("success" -> "Client %s has been created".format(client.clientId))
-//      }
-//    )
-//  }
 
-  def edit = TODO
+  def edit = Action { implicit request =>
+    clientForm.bindFromRequest.fold(
+      form => BadRequest(views.html.editClient(form)),
+      client => {
+        ClientsObj.findClientId(client.clientId)
+        Redirect(routes.Headers.create(client.clientId.toInt)).flashing("message" -> "Submitted")
+      }
+    )
+  }
   
   def create = Action { implicit request =>
     clientForm.bindFromRequest.fold(

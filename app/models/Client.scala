@@ -1,5 +1,7 @@
 package models
 
+import org.bson.types.ObjectId;
+
 import play.api.Play.current
 import com.novus.salat._
 import com.novus.salat.dao._
@@ -25,11 +27,28 @@ case class Client(
 //  }
 //}
 
-object ClientsObj {
+object ClientsObj extends ModelCompanion[Client, ObjectId] {
   val clients = MongoConnection()("ares_customizer")("clients")
+  val dao = new SalatDAO[Client, ObjectId](collection = clients) {}
   
   def all = clients.map(grater[Client].asObject(_)).toList
+  
+  def findClient(id: ObjectId): Option[Client] = dao.findOne(MongoDBObject("_id" -> id))
+  
   def create(client: Client) {
     clients += grater[Client].asDBObject(client)
   }
+  
+  def saveClient(client: Client) {
+    var _client = findClient(client.id)
+    if (_client.isDefined) {
+      val toSaveClient = new Client(
+          id = client.id,
+          clientId = client.clientId,
+          pageType = client.pageType)
+      save(toSaveClient)
+      
+    }
+  }
+  
 }

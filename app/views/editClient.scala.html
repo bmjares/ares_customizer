@@ -1,23 +1,9 @@
-@(clients: String, editClient: Form[Client])
+@(editClient: Form[Client])
+@import helper.twitterBootstrap._
+@import helper._
+@main("test") {
 
-@main("aRes") {
-
-    <fieldset>
-      <div id="legend" class="">
-        <legend class="">Welcome to the aRes Customizer</legend>
-      </div>
-          <div class="controls">
-			<a href="/clients/new">Create New Landing Page</a>
-          </div><br/><br/>
-          <div class="controls">
-			<p>@clients</p>
-          </div>
-        </div>
-
-    </fieldset> 
-    
 	@helper.form(action = routes.Clients.edit) {
-	<br/><br/><br/>
 	  <form class="form-horizontal">
 	    <fieldset>
 	      <div id="legend" class="">
@@ -42,5 +28,5 @@
 	    </fieldset>
 	  </form>
 	}
-    
+
 }

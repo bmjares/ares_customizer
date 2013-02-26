@@ -11,12 +11,17 @@ import play.api.Play.current
 import se.radley.plugin.salat._
 import se.radley.plugin.salat.Formats._
 import com.novus.salat._
+import com.novus.salat.dao._
+import com.novus.salat.global._
 
 import com.mongodb.casbah.Imports._
 import views._
 import models._
 
 object Headers extends Controller {
+  
+  val collection = mongoCollection("headers")
+  val dao = new SalatDAO[Header, ObjectId](collection = collection) {}  
   
     def headerForm = Form(
     mapping(
@@ -26,7 +31,11 @@ object Headers extends Controller {
     )(Header.apply)(Header.unapply)
   )
   
+  def findClientById(clientId: Int): Option[Header] = dao.findOne(MongoDBObject("_id" -> clientId))
+  
   def submit = TODO
+  
+  def edit = TODO
   
   //request.queryString.map { case (k,v) => k -> v.mkString }
   def create(clientId: Int) = Action { implicit request =>
@@ -36,7 +45,7 @@ object Headers extends Controller {
       form => BadRequest(views.html.createHeader(clientId, form)),
       header => {
         HeaderObj.create(header)
-        Ok(views.html.index("ares")).flashing("message" -> "Submitted")
+        Ok(views.html.createHeader(header.clientId, headerForm)).flashing("message" -> "Submitted")
       }
     )
   }
