@@ -35,7 +35,7 @@ object Clients extends Controller {
     clientForm.bindFromRequest.fold(
       form => BadRequest(views.html.editClient(form)),
       client => {
-        ClientsObj.findClientId(client.clientId)
+        ClientsObj.findClient(client.id)
         Redirect(routes.Headers.create(client.clientId.toInt)).flashing("message" -> "Submitted")
       }
     )
