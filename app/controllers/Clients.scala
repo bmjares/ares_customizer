@@ -31,12 +31,13 @@ object Clients extends Controller {
     Ok(views.html.index(clientsList.toString, clientForm))
   }
 
-  def find = Action { implicit request =>
+  def find(clientId: Int) = Action { implicit request =>
     clientForm.bindFromRequest.fold(
-      form => BadRequest(views.html.editClient(form)),
+      form => BadRequest(views.html.index(clientForm.toString, clientForm)),
       client => {
-        ClientsObj.saveClient(client)
+        ClientsObj.findClientbyClientId(clientId)
         Redirect(routes.Headers.create(client.clientId.toInt)).flashing("message" -> "Submitted")
+        //needs to  pass client object to view, not just id
       }
     )
   }
