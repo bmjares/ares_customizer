@@ -9,6 +9,7 @@ import se.radley.plugin.salat._
 import com.novus.salat.global._
 
 case class Header(
+  @Key("_id") id: ObjectId = new ObjectId,    
   clientId: Int,
   headline: String,
   headerLayout: String

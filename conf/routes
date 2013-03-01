@@ -6,7 +6,7 @@
 GET     /                           controllers.Clients.index
 
 GET     /clients/new	            controllers.Clients.create
-GET    /clients          			controllers.Clients.edit
+GET    /clients          			controllers.Clients.find
 
 GET		/headers/:clientId			controllers.Headers.create(clientId: Int)
 

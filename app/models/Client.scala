@@ -2,6 +2,7 @@ package models
 
 import org.bson.types.ObjectId;
 
+import play.api._
 import play.api.Play.current
 import com.novus.salat._
 import com.novus.salat.dao._
@@ -40,13 +41,15 @@ object ClientsObj extends ModelCompanion[Client, ObjectId] {
   }
   
   def saveClient(client: Client) {
-    var _client = findClient(client.id)
-    if (_client.isDefined) {
+    var foundClient = findClient(client.id)
+    Logger.info("client in model saveClient: "+ client.toString)
+    if (foundClient.isDefined) {
+      Logger.info("in found client")
       val toSaveClient = new Client(
           id = client.id,
           clientId = client.clientId,
           pageType = client.pageType)
-      save(toSaveClient)
+      dao.save(toSaveClient)
       
     }
   }

@@ -25,15 +25,12 @@ object Headers extends Controller {
   
     def headerForm = Form(
     mapping(
+      "id" -> ignored(new ObjectId),        
       "clientId" -> number,
       "headline" -> text,
       "headerLayout" -> text
     )(Header.apply)(Header.unapply)
   )
-  
-  def findClientById(clientId: Int): Option[Header] = dao.findOne(MongoDBObject("_id" -> clientId))
-  
-  def submit = TODO
   
   def edit = TODO
   
