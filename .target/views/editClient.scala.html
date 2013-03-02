@@ -1,32 +1,33 @@
-@(editClient: Form[Client])
+@(clientForm: Form[Client], clientId: Int)
 @import helper.twitterBootstrap._
 @import helper._
 @main("test") {
-
-	@helper.form(action = routes.Clients.edit) {
-	  <form class="form-horizontal">
-	    <fieldset>
-	      <div id="legend" class="">
-	        <legend class="">Edit Existing Page</legend>
-	      </div>
-	    
-	    <div class="control-group">
-	          <!-- Text input-->
-	          <div class="controls">
-				@helper.inputText(editClient("clientId"), 'class -> "form-horizontal", '_label -> "Client ID", '_help -> "")
-	          </div>
-	        </div>
-	    <div class="control-group">
-	          <label class="control-label"></label>
+    
+	@helper.form(action = routes.Clients.create) {
 	
-	          <!-- Button -->
-	          <div class="controls">
-	            <button class="btn btn-warning">Edit</button>
-	          </div>
-	        </div>	
-	
-	    </fieldset>
-	  </form>
+	    <div class="control-group">
+        	<div class="controls">
+				@helper.inputText(clientForm("clientId"), 'class -> "form-horizontal", '_label -> "Enter Client ID", '_help -> "")
+		 	</div>
+		 	<div class="controls">
+				@select(
+		            field = clientForm("pageType"),
+			            options = options(
+			                "hotel" -> "Hotel",
+			                "attraction" -> "Attraction",
+			                "package" -> "Package",
+			                "multi" -> "Multi-Product"
+			            ),
+		            args = '_label -> "Choose Page Type"
+		        ) 
+		 	</div>
+        </div>
+        
+        <div class="control-group">
+          <div class="controls">
+            <button class="btn btn-success">Submit</button>
+          </div>
+        </div>
 	}
-
+    
 }
