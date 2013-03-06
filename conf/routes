@@ -7,7 +7,7 @@ GET     /                           controllers.Clients.index
 
 GET     /clients/new	            controllers.Clients.create
 GET    /clients/:clientId          	controllers.Clients.find(clientId: Int)
-#GET		/clients/:clientId			controllers.Clients.edit(clientId: Int)
+GET    /clients/update          	controllers.Clients.update
 
 GET		/headers/:clientId			controllers.Headers.create(clientId: Int)
 

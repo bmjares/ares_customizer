@@ -35,7 +35,7 @@ object ClientsObj extends ModelCompanion[Client, ObjectId] {
   def all = clients.map(grater[Client].asObject(_)).toList
   
   def findClient(id: ObjectId): Option[Client] = dao.findOne(MongoDBObject("_id" -> id))
-  def findClientbyClientId(clientId: Int): Option[Client] = dao.findOne(MongoDBObject("clientId" -> clientId))
+  def findClientbyClientId(clientId: Int) = dao.findOne(MongoDBObject("clientId" -> clientId))
   
   def create(client: Client) {
     clients += grater[Client].asDBObject(client)

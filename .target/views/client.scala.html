@@ -1,9 +1,9 @@
-@(clientForm: Form[Client], clientId: Int)
+@(clientForm: Form[Client])
 @import helper.twitterBootstrap._
 @import helper._
-@main("test") {
+@main("aRes") {
     
-	@helper.form(action = routes.Clients.create) {
+
 	
 	    <div class="control-group">
         	<div class="controls">
@@ -22,10 +22,17 @@
 		        ) 
 		 	</div>
         </div>
-        
+   	@helper.form(action = routes.Clients.create) {     
         <div class="control-group">
           <div class="controls">
-            <button class="btn btn-success">Submit</button>
+            <button class="btn btn-success">Create</button>
+          </div>
+        </div>
+	}
+	@helper.form(action = routes.Clients.update) {     
+        <div class="control-group">
+          <div class="controls">
+            <button class="btn btn-warning">Edit</button>
           </div>
         </div>
 	}

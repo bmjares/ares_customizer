@@ -27,29 +27,36 @@ object Clients extends Controller {
   )
 
   def index = Action { implicit request =>
+    //change 1 to _ 
     val clientsList = ClientsObj.all(1)
     Ok(views.html.index(clientsList.toString, clientForm))
   }
-
-  def find(clientId: Int) = Action { implicit request =>
+  
+  def update = Action { implicit request =>
     clientForm.bindFromRequest.fold(
-      form => BadRequest(views.html.index(clientForm.toString, clientForm)),
+      form => BadRequest(views.html.client(form)),
       client => {
-        ClientsObj.findClientbyClientId(clientId)
-        Redirect(routes.Headers.create(client.clientId.toInt)).flashing("message" -> "Submitted")
-        //needs to  pass client object to view, not just id
+	  	ClientsObj.findClientbyClientId(client.clientId).map( client =>
+	  	    ClientsObj.saveClient(client)
+	  	)
+        Redirect(routes.Clients.create).flashing("message" -> "Submitted")
       }
     )
   }
   
+  def find(clientId: Int) = Action { implicit request =>
+    ClientsObj.findClientbyClientId(clientId).map { client =>
+      Ok(views.html.client(clientForm.fill(client)))
+    }.getOrElse(NotFound)
+  }
+  
   def create = Action { implicit request =>
     clientForm.bindFromRequest.fold(
-      form => BadRequest(views.html.createForm(form)),
+      form => BadRequest(views.html.client(form)),
       client => {
-        Logger.info("client in clients create: "+ client.toString)
         Logger.info("access clientid: "+ client.clientId)
         ClientsObj.create(client)
-        Redirect(routes.Headers.create(client.clientId.toInt)).flashing("message" -> "Submitted")
+        Redirect(routes.Clients.create).flashing("message" -> "Submitted")
       }
     )
   }
